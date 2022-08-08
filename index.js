@@ -2,7 +2,7 @@ const path = require("path");
 const express = require("express");
 const cors = require("cors");
 const morgan = require("morgan");
-const { init: initDB, Counter } = require("./db");
+const { init: initDB, Counter } = require("./db/index");
 
 const logger = morgan("tiny");
 
@@ -30,6 +30,8 @@ app.post("/api/count", async (req, res) => {
   res.send({
     code: 0,
     data: await Counter.count(),
+    createdAt: await Counter.createdAt(),
+    updataAt: await Counter.updatedAt(),
   });
 });
 
